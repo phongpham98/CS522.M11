@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+	<title>Sorting Algorithms Visualisation Application</title>
+	<link rel="icon" href="https://www.pngkey.com/png/full/487-4876724_ascending-sorting-icon-icon.png"
+		type="image/icon type">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+		rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+	<link rel="icon" href="./img/pointer.png" />
+	<link rel="stylesheet" href="./css/css.css">
+	<link rel="stylesheet" href="./css/style.css">
+	<link rel="stylesheet" href="./css/responisve.css">
+	<link rel="stylesheet" href="./css/vendor/css/normalize.css" />
+	<link rel="stylesheet" href="./css/vendor/css/fontawesome.css" />
+</head>
+
+<body>
+	<div class="container mt-4 mb-4">
+		<!-- select sort algorithm -->
+		<div class="row">
+			<div class="col-4 middle-logo">
+				<div class="w-100 text-center h3 mb-4 font-weight-bold text-light">
+					Sorting Algorithms Visualisation
+				</div>
+				<img src="https://www.pngkey.com/png/full/487-4876724_ascending-sorting-icon-icon.png" alt="">
+			</div>
+			<div class="col-md-8">
+				<div class="row">
+					<div class="col-md-4 pr-0">
+						<label class="text-light" for="sort_algo">Algorithms</label>
+						<div class="d-flex align-items-center">
+							<select class="form-control" name="sort_algo" id="sort_algo">
+								<option selected value="bubble">Bubble Sort</option>
+								<option value="selection">Selection Sort</option>
+								<option value="insertion">Insertion Sort</option>
+								<option value="interchange">Interchange Sort</option>
+								<option value="linked-list">Linked List</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-8 pr-0">
+						<div class="row">
+							<div class="col-md-6">
+								<label class="text-light" for="speedSort">Speed</label>
+								<div class="d-flex align-items-center">
+									<select class="form-control" name="speedSort" id="speedSort">
+										<option value="2000">Super Slow</option>
+										<option value="2800">Slow</option>
+										<option selected value="2900">Medium</option>
+										<option value="3000">Fast</option>
+										<option value="3100">Super Fast</option>
+									</select>
+								</div>
+							</div>
+							<!-- <div class="col-md-6 pl-0">
+								<label class="text-light" for="data_type">Data</label>
+								<div class="d-flex align-items-center">
+									<select class="form-control" name="data_type" id="data_type">
+										<option value="random">Random</option>
+										<option value="manual">Manual</option>
+									</select>
+								</div>
+							</div> -->
+						</div>
+					</div>
+					<div class="col-md-12 mt-4 manual-data pr-0">
+						<!-- <label class="text-light" for="data_type">Manual Data(25 character limit, separated by commas "
+							,
+							")</label> -->
+						<div class="create action-menu-pullout">
+							<span id="create-userdefined-input" class="new-menu-option"><input class="form-control"
+									type="text" id="userdefined-input" autocomplete="off"></span>
+							<span id="create-userdefined-go" class="execAction new-menu-option coloured-menu-option"
+								onclick="createList('userdefined')">
+								<p>Confirm</p>
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="row mt-4">
+					<div class="col-md-6 pr-0">
+						<!-- <label class="text-light" for="dia-controls">Control</label> -->
+						<div id="media-controls" class="d-inline-flex align-items-center justify-content-start">
+							<span id="goto_begining" class="media-control-button" title="goto beginning"
+								onclick="goToBeginning()">
+								<img width="35px" src="./image/StartEnd.png" alt="next frame">
+							</span>
+							<span id="previous" class="media-control-button ml-3" title="step backward"
+								onclick="stepBackward()">
+								<img width="35px" src="./image/Previous.png" alt="previous frame">
+							</span>
+							<span id="pause" class="media-control-button ml-3" title="pause" onclick="pause()"
+								style="display: none;">
+								<img width="35px" src="./image/Pause.png" alt="pause">
+							</span>
+							<span id="play" class="media-control-button ml-3" title="play" onclick="play()">
+								<img width="35px" src="./image/Play.png" alt="play" title="play">
+							</span>
+							<span id="next" class="media-control-button ml-3" title="step forward"
+								onclick="stepForward()">
+								<img width="35px" src="./image/Next.png" alt="next frame">
+							</span>
+							<span id="goto_end" class="media-control-button ml-3" title="goto end" onclick="goToEnd()">
+								<img width="35px" id="img-end" src="./image/StartEnd.png" alt="next frame">
+							</span>
+							<span id="sort-go" class="go-btn btn" onclick="sort()">
+								<img width="35px" src="./image/Go.png" alt="Go">
+							</span>
+						</div>
+					</div>
+					<div class="col-md-6 pr-0">
+						<div class="change-data" id="random_data">
+							<span>
+								random data
+							</span>
+							<img width="35px" style="cursor: pointer;" class="img-random-data" src="./img/random.png"
+								alt="next frame">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div class="row">
+		<div class="col-md-8 sort-canvas-wrapper">
+			<div class="title-header" id="title-header">Bubble Sort</div>
+			<div id="sort-viz">
+				<svg id="viz-canvas" height="300" width="1000"></svg>
+			</div>
+			<main id="linked-list">
+				<div id="settings">
+					<div class="menu-header">
+						<div id="close-menu">
+							<i class="fas fa-times"></i>
+						</div>
+						<div>
+							<h2>Settings</h2>
+						</div>
+					</div>
+
+					<div class="settings-container">
+						<div>
+							<p>Node Animation Speed: </p>
+							<input type="number" placeholder="Miliseconds" />
+						</div>
+
+						<div>
+							<p>Pointer Animation Speed: </p>
+							<input type="number" placeholder="Miliseconds" />
+						</div>
+
+						<div>
+							<p>Delete Animation Speed: </p>
+							<input type="number" placeholder="Miliseconds" />
+						</div>
+
+						<div class="error-message">
+							<p id="settings-error"></p>
+						</div>
+
+						<div class="success">
+							<p id="succes"></p>
+						</div>
+
+						<button id="save-settings">Save</button>
+					</div>
+				</div>
+
+				<header>
+					<div class="header-container">
+						<div id="settings-menu">
+							<!-- <i class="fas fa-bars"></i> -->
+						</div>
+
+						<!-- <div>
+							<h1>Linked <span>List</span> Visualization</h1>
+						</div> -->
+
+						<!-- <div id="theme-switcher">
+							<i class="fas fa-adjust"></i>
+						</div> -->
+					</div>
+				</header>
+				<section class="list" id="list"></section>
+
+				<section class="errors">
+					<div class="error-message">
+						<p id="error"></p>
+					</div>
+				</section>
+
+				<section class="operations">
+					<div class="wrapper">
+						<div>
+							<button class="button" id="set-btn">Set</button>
+							<input type="number" placeholder="Index" />
+							<input type="number" placeholder="Data" />
+						</div>
+
+						<div>
+							<button class="button" id="insert-btn">Insert</button>
+							<input type="number" placeholder="Index" />
+							<input type="number" placeholder="Data" />
+						</div>
+
+						<div>
+							<button class="button" id="add-btn">Add</button>
+							<input type="number" placeholder="Data" />
+						</div>
+
+						<div>
+							<div class="remove">
+								<button class="button" id="remove-btn">Remove</button>
+								<button class="button" id="remove-settings">
+									<i class="fas fa-cog"></i>
+								</button>
+							</div>
+
+							<button class="remove-option" id="remove-index-btn">
+								Index
+							</button>
+							<button class="remove-option" id="remove-data-btn">
+								Data
+							</button>
+
+							<input type="number" placeholder="Index" />
+							<input type="number" placeholder="Data" />
+						</div>
+					</div>
+				</section>
+			</main>
+
+		</div>
+
+		<!-- visualization -->
+		<div class="pl-0 col-md-4">
+			<div id="codetrace" class="panel d-flex">
+				<div>
+					<a class="pl-3 pt-3 pb-3 bg-dark w-100 font-weight-bold text-light" data-toggle="collapse"
+						href="#status" role="button" aria-expanded="false" aria-controls="status">
+						▶ Algorithms Debug
+					</a>
+					<div id="status" class="status-panel">
+						<p></p>
+					</div>
+				</div>
+				<div>
+					<a class="pl-3 pt-3 pb-3 bg-dark w-100 font-weight-bold text-light" data-toggle="collapse"
+						href="#al_code" role="button" aria-expanded="false" aria-controls="al_code">
+						▶ Algorithms Code
+					</a>
+					<div id="al_code">
+						<p id="code1" class="code-line pt-2"></p>
+						<p id="code2" class="code-line">
+							<b></b>
+						</p>
+						<p id="code3" class="code-line"></p>
+						<p id="code4" class="code-line"></p>
+						<p id="code5" class="code-line"></p>
+						<p id="code6" class="code-line">
+							<b></b>
+						</p>
+						<p id="code7" class="code-line pb-2">
+							<b></b>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<footer class="mt-4">
+	<div class="container">
+		<div class="row" style="margin-bottom: 2rem;">
+			<!-- <div class="col-md-4 middle-logo">
+				<div class="w-100 text-center h3 mb-4 font-weight-bold text-light">
+					Sorting Algorithms Visualisation Application
+				</div>
+				<img src="https://www.pngkey.com/png/full/487-4876724_ascending-sorting-icon-icon.png" alt="">
+			</div> -->
+			<div class="col-md-8">
+				<p class="text-light h4 w-100">About Us</p>
+				<div class="row">
+					<div class="col-md-4">
+						<p class="text-light w-100">Lê Quang Thắng - 16521099</p>
+					</div>
+					<div class="col-md-4">
+						<p class="text-light w-100">Võ Ngọc Quyến - 16521014</p>
+					</div>
+					<div class="col-md-4">
+						<p class="text-light w-100">Hoàng Minh Anh - 16520035</p>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-4">
+						<p class="text-light w-100">Phạm Văn Phong - 16521521</p>
+					</div>
+					<div class="col-md-4">
+						<p class="text-light w-100">Nguyễn Đức Anh - 16521623</p>
+					</div>
+					<div class="col-md-4">
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+				</div>
+				<p class="text-light mt-2 w-100">
+					<i>
+						Our mentor: Nguyen Dinh Hien
+					</i>
+				</p>
+				<p class="text-light mt-2 w-100">
+					<i>
+						In this project, we used Sorting Widget from Ian Leow Tze Wei, https://visualgo.net/ for
+						building.
+					</i>
+				</p>
+
+			</div>
+		</div>
+	</div>
+</footer>
+<script src="./js/d3.min.js"></script>
+<script src="./js/main_func.js"></script>
+<script src="./js/sorting_widget.js"></script>
+<script src="vendor/js/fontawesome.js"></script>
+<script src="js/LinkedList.js"></script>
+<script src="js/main.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/settings.js"></script>
